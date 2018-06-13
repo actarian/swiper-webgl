@@ -1,0 +1,23 @@
+{
+    "name": "swiper-webgl",
+    "description": "Swiper Webgl",
+    "main": "./bower_components",
+    "authors": [
+        "actarian <lzampetti@gmail.com>"
+    ],
+    "license": "MIT",
+    "keywords": [
+        "glsl"
+    ],
+    "homepage": "https://github.com/actarian/swiper-webgl",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "glslCanvas": "https://github.com/patriciogonzalezvivo/glslCanvas.git#0.1.3",
+        "swiper": "^4.3.3"
+    }
+}

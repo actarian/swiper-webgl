@@ -1,0 +1,34 @@
+[{
+    "inputFiles": [
+        "bower_components/glslCanvas/dist/glslCanvas.js",
+        "bower_components/swiper/dist/js/swiper.js"
+    ],
+    "outputFileName": "docs/js/vendors.js",
+    "minify": {
+        "enabled": true
+    }
+}, {
+    "inputFiles": [
+        "bower_components/swiper/dist/css/swiper.css"
+    ],
+    "outputFileName": "docs/css/vendors.css",
+    "minify": {
+        "enabled": true
+    }
+}, {
+    "inputFiles": [
+        "docs/css/docs.css"
+    ],
+    "outputFileName": "docs/css/docs.css",
+    "minify": {
+        "enabled": true
+    }
+}, {
+    "inputFiles": [
+        "src/docs.js"
+    ],
+    "outputFileName": "docs/js/docs.js",
+    "minify": {
+        "enabled": true
+    }
+}]
