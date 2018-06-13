@@ -18,6 +18,7 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev'
             },
+            speed: 750,
             loop: false,
             // watchSlidesProgress: true,
         });
@@ -65,6 +66,15 @@
                 glsl.resize();
             }
             console.log(W, H, glslNode.offsetWidth, glslNode.offsetHeight);
+
+            /*
+            var w = content.offsetWidth + o;
+            var h = content.offsetHeight + o;
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+            canvas.width = w;
+            canvas.height = h;
+            */
         }
 
 
