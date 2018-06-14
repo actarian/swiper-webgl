@@ -26,6 +26,8 @@ body {
   display: block;
   width: calc(100vw - 30px);
   height: 40vw; }
+  .swiper-slide img {
+    visibility: hidden; }
 
 .btn {
   display: none;

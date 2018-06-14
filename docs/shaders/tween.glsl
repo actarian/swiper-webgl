@@ -1,8 +1,8 @@
 precision mediump float;
 
-uniform sampler2D u_tex0; // https://raw.githubusercontent.com/actarian/swiper-webgl/master/docs/img/masks/mask-01.jpg
-uniform sampler2D u_tex1; // https://raw.githubusercontent.com/actarian/swiper-webgl/master/docs/img/pic-01.jpg
-uniform sampler2D u_tex2; // https://raw.githubusercontent.com/actarian/swiper-webgl/master/docs/img/pic-02.jpg
+uniform sampler2D u_tex0; /* https://raw.githubusercontent.com/actarian/swiper-webgl/master/docs/img/masks/mask-01.jpg */
+uniform sampler2D u_tex1; /* https://raw.githubusercontent.com/actarian/swiper-webgl/master/docs/img/pic-01.jpg */
+uniform sampler2D u_tex2; /* https://raw.githubusercontent.com/actarian/swiper-webgl/master/docs/img/pic-02.jpg */
 
 uniform vec2 u_tex0Resolution;
 uniform vec2 u_tex1Resolution;

@@ -30,6 +30,9 @@ body {
     display: block;
     width: calc(100vw - 30px);
     height: 40vw;
+    img {
+        visibility: hidden;
+    }
 }
 
 .btn {
