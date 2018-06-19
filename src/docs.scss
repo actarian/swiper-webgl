@@ -18,6 +18,20 @@ body {
     left: 0;
     width: calc(100vw - 30px);
     height: 40vw;
+    opacity: 0.9;
+}
+
+.info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100vw - 30px);
+    height: 40vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 40px;
 }
 
 .swiper-container {

@@ -3,21 +3,20 @@
 (function () {
     'use strict';
 
-    /*--------------------------------------------------
-    Swiper
-    --------------------------------------------------*/
+    addSwiper();
+
     function addSwiper() {
         var containerNode = document.querySelector('.section');
+        var infoNode = containerNode.querySelector('.info > span');
         var swiperContainerNode = containerNode.querySelector('.swiper-container');
         var pictureNodes = swiperContainerNode.querySelectorAll('img');
         var glsl;
-        // console.log(pictureNodes);
         var pictureData = [];
         var pictures = Array.prototype.slice.call(pictureNodes, 0).map(function (node, index) {
             var src = node.getAttribute('src');
             var img = new Image();
             img.onload = function () {
-                console.log('loaded', src);
+                // console.log('loaded', src);
                 pictureData[index] = img;
                 if (glsl) {
                     updateTextures(glsl.index, glsl.index);
@@ -33,8 +32,8 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev'
             },
-            speed: 750,
-            loop: false,
+            speed: 2000,
+            loop: true,
             preloadImages: true,
             initialSlide: 0,
             on: {
@@ -54,10 +53,12 @@
                     swiper = this;
                     onTransitionEnd(swiper, false);
                 },
+                /*
                 progress: function () {
                     swiper = this;
-                    console.log('progress', swiper.progress);
+                    // console.log('progress', swiper.progress);
                 }
+                */
             }
         });
 
@@ -78,19 +79,15 @@
             });
             glsl.index = getCurrentIndex(swiper);
             glsl.on('render', function () {
-                var x = getX(swiper);
-                /*
-                if (previousIndex !== index) {
-                    previousIndex = index;
-                    console.log('newIndex', index);
-                    updateTextures(index, index);
-                }
-                */
-                if (previousX !== x) {
-                    var dir = x >= 1; // (x - previousX) > 0;
+                var x = getPow(swiper);
+                // x = Math.min(0.99, x);
+                var diff = x - previousX;
+                if (previousX !== x && Math.abs(diff) < 0.9) {
+                    previousX = x;
+                    var dir = diff > 0;
+                    // infoNode.innerText = x.toFixed(2) + ' ' + swiper.realIndex + ' ' + dir;
                     if (previousDir !== dir) {
                         previousDir = dir;
-                        // console.log('move forward', dir, 'index', index);
                         var from, to;
                         if (dir) {
                             from = glsl.index;
@@ -103,17 +100,13 @@
                             updateTextures(to, from);
                         }
                     }
-                    previousX = x;
-                    var pow = x % 1.0;
-                    if (previousPow !== pow) {
-                        previousPow = pow;
-                        glsl.setUniforms({
-                            u_mix: pow
-                        });
-                    }
+                    glsl.setUniforms({
+                        u_mix: x
+                    });
                 }
                 glsl.forceRender = true;
             });
+
             getResource("shaders/tween.glsl", function (data) {
                 glsl.load(data);
             });
@@ -200,7 +193,7 @@
         */
 
         function getX(swiper) {
-            return (swiper.getTranslate() / swiperContainerNode.offsetWidth * -1);
+            return (swiper.getTranslate() / containerNode.offsetWidth * -1);
         }
 
         function getPow(swiper) {
@@ -208,8 +201,6 @@
         }
 
     }
-
-    addSwiper();
 
     function getResource(url, callback) {
         var request = new XMLHttpRequest();
