@@ -1,5 +1,7 @@
 [{
     "inputFiles": [
+        "bower_components/greensock/src/uncompressed/easing/EasePack.js",
+        "bower_components/greensock/src/uncompressed/TweenLite.js",
         "bower_components/glslCanvas/dist/glslCanvas.js",
         "bower_components/swiper/dist/js/swiper.js"
     ],

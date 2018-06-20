@@ -1,4 +1,4 @@
-/* global window, document, console, GlslCanvas, Swiper */
+/* global window, document, console, GlslCanvas, Swiper, TweenLite */
 
 (function () {
     'use strict';
@@ -27,6 +27,9 @@
         var swiperContainerNode = containerNode.querySelector('.swiper-container');
         var pictureNodes = swiperContainerNode.querySelectorAll('img');
         var glsl;
+        var uniforms = {
+            hover: 0.0,
+        };
         var pictureData = [];
         var pictures = Array.prototype.slice.call(pictureNodes, 0).map(function (node, index) {
             var src = node.getAttribute('src');
@@ -38,6 +41,7 @@
                     updateTextures(glsl.index, glsl.index);
                 }
             };
+            // img.crossOrigin = 'Anonymous';
             img.src = src;
             return src;
         });
@@ -66,12 +70,8 @@
                         filtering: 'mipmap',
                         repeat: true,
                     });
-                    containerNode.addEventListener('mouseover', function () {
-                        glsl.setUniform('u_hover', true);
-                    });
-                    containerNode.addEventListener('mouseout', function () {
-                        glsl.setUniform('u_hover', false);
-                    });
+                    containerNode.addEventListener('mouseover', onOver);
+                    containerNode.addEventListener('mouseout', onOut);
                 },
                 slideNextTransitionEnd: function () {
                     swiper = this;
@@ -89,6 +89,28 @@
                 */
             }
         });
+
+        function onOver() {
+            TweenLite.to(uniforms, 2.0, {
+                hover: 1.0,
+                ease: Elastic.easeOut,
+                overwrite: 'all',
+                onUpdate: function () {
+                    glsl.setUniform('u_hover', uniforms.hover);
+                },
+            });
+        }
+
+        function onOut() {
+            TweenLite.to(uniforms, 2.0, {
+                hover: 0.0,
+                ease: Elastic.easeOut,
+                overwrite: 'all',
+                onUpdate: function () {
+                    glsl.setUniform('u_hover', uniforms.hover);
+                },
+            });
+        }
 
         var previousX = 0,
             previousIndex = null,
