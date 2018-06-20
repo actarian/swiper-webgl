@@ -12,6 +12,7 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_mix;
 uniform float u_time;
+uniform bool u_hover;
 
 #define uv gl_FragCoord.xy / u_resolution.xy
 #define rx 1.0 / min(u_resolution.x, u_resolution.y)
@@ -39,7 +40,11 @@ void main() {
     
     // picture A texture
     float displacement1 = mixer * displacementStrength;
-    vec2 coord1 = uv + vec2(noise.r * displacement1, noise.g * displacement1) + bubbling;    
+    vec2 coord1 = uv + vec2(noise.r * displacement1, noise.g * displacement1) + bubbling;  
+    
+    coord1.x += u_time + (cos(coord1.y) * 0.5);
+    // coord1.y += u_time * 0.25;
+    
     vec3 texture1 = texture2D(u_tex1, cropCenter(coord1, u_tex1Resolution)).rgb;  
 
     // picture B texture

@@ -1,14 +1,15 @@
 body {
     height: 100%;
     margin: 0;
+    padding: 0;
     background: #171717;
-    padding: 15px;
 }
 
 .section {
     position: relative;
-    width: calc(100vw - 30px);
+    width: 100%;
     height: 40vw;
+    background: black;
 }
 
 .canvas {
@@ -16,37 +17,22 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100vw - 30px);
-    height: 40vw;
-    opacity: 0.9;
+    width: 100%;
+    height: 100%; // opacity: 0.9;
 }
 
 .info {
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100vw - 30px);
-    height: 40vw;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     font-size: 40px;
-}
-
-.swiper-container {
-    position: relative;
-    z-index: 1;
-}
-
-.swiper-slide {
-    overflow: hidden;
-    display: block;
-    width: calc(100vw - 30px);
-    height: 40vw;
-    img {
-        visibility: hidden;
-    }
+    display: none;
 }
 
 .btn {
@@ -64,11 +50,29 @@ body {
     color: white;
 }
 
+/*
 @media screen and (min-width: 960px) {
     body {
         padding: 20px;
     }
     .btn {
         display: block;
+    }
+}
+*/
+
+@import "components/swiper";
+.swiper-container {
+    position: relative;
+    z-index: 1;
+}
+
+.swiper-slide {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 40vw;
+    img {
+        visibility: hidden;
     }
 }

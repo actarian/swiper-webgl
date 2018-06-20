@@ -3,6 +3,22 @@
 (function () {
     'use strict';
 
+    Element.prototype.hasClass = function (name) {
+        return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(this.className);
+    };
+
+    Element.prototype.addClass = function (name) {
+        if (!this.hasClass(name)) {
+            this.className = this.className ? (this.className + ' ' + name) : name;
+        }
+    };
+
+    Element.prototype.removeClass = function (name) {
+        if (this.hasClass(name)) {
+            this.className = this.className.split(name).join('').replace(/\s\s+/g, ' '); // .replace(new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)', 'g'), '');
+        }
+    };
+
     addSwiper();
 
     function addSwiper() {
@@ -27,22 +43,34 @@
         });
         var swiper = new Swiper(swiperContainerNode, {
             direction: 'horizontal',
-            pagination: false, // { el: '.swiper-pagination', }
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev'
             },
-            speed: 2000,
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+                clickable: true,
+            },
+            speed: 750,
             loop: true,
             preloadImages: true,
             initialSlide: 0,
+            mousewheel: true,
             on: {
                 init: function () {
                     swiper = this;
+                    swiperContainerNode.addClass('active');
                     glsl = getGlslCanvas(swiper);
                     glsl.loadTexture('u_tex0', 'https://raw.githubusercontent.com/actarian/swiper-webgl/master/docs/img/masks/mask-01.jpg', {
                         filtering: 'mipmap',
                         repeat: true,
+                    });
+                    containerNode.addEventListener('mouseover', function () {
+                        glsl.setUniform('u_hover', true);
+                    });
+                    containerNode.addEventListener('mouseout', function () {
+                        glsl.setUniform('u_hover', false);
                     });
                 },
                 slideNextTransitionEnd: function () {
@@ -162,11 +190,11 @@
             if (glsl) {
                 var picture1 = pictureData[index1 % pictures.length];
                 var picture2 = pictureData[index2 % pictures.length];
-                glsl.loadTexture('u_tex1', picture1, {
+                glsl.uniformTexture('u_tex1', picture1, {
                     filtering: 'mipmap',
                     repeat: true,
                 });
-                glsl.loadTexture('u_tex2', picture2, {
+                glsl.uniformTexture('u_tex2', picture2, {
                     filtering: 'mipmap',
                     repeat: true,
                 });

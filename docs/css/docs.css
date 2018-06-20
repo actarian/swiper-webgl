@@ -1,46 +1,35 @@
 body {
   height: 100%;
   margin: 0;
-  background: #171717;
-  padding: 15px; }
+  padding: 0;
+  background: #171717; }
 
 .section {
   position: relative;
-  width: calc(100vw - 30px);
-  height: 40vw; }
+  width: 100%;
+  height: 40vw;
+  background: black; }
 
 .canvas {
   display: block;
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100vw - 30px);
-  height: 40vw;
-  opacity: 0.9; }
+  width: 100%;
+  height: 100%; }
 
 .info {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100vw - 30px);
-  height: 40vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 40px; }
-
-.swiper-container {
-  position: relative;
-  z-index: 1; }
-
-.swiper-slide {
-  overflow: hidden;
-  display: block;
-  width: calc(100vw - 30px);
-  height: 40vw; }
-  .swiper-slide img {
-    visibility: hidden; }
+  font-size: 40px;
+  display: none; }
 
 .btn {
   display: none;
@@ -56,8 +45,77 @@ body {
   background: #272727;
   color: white; }
 
+/*
 @media screen and (min-width: 960px) {
-  body {
-    padding: 20px; }
-  .btn {
-    display: block; } }
+    body {
+        padding: 20px;
+    }
+    .btn {
+        display: block;
+    }
+}
+*/
+.swiper-container {
+  width: 100%;
+  height: 100%; }
+  .swiper-container:not(.active) .swiper-pagination-bullets,
+  .swiper-container:not(.active) .swiper-button-prev,
+  .swiper-container:not(.active) .swiper-button-next {
+    display: none; }
+
+.swiper-wrapper {
+  max-width: 750px; }
+  .swiper-wrapper:not([style]) {
+    margin: 0 auto; }
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: 50px;
+  color: #fff; }
+
+.swiper-pagination-bullet {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: #fff;
+  opacity: 0.4; }
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0; }
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet + .swiper-pagination-bullet {
+  margin-left: 12px; }
+
+.swiper-pagination-bullet-active {
+  opacity: 1; }
+
+.swiper-button-prev,
+.swiper-button-next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  color: white;
+  width: 60px;
+  height: 60px;
+  font-size: 35px;
+  margin-top: -30px; }
+
+.swiper-button-prev {
+  left: 0; }
+
+.swiper-button-next {
+  right: 0; }
+
+.swiper-container {
+  position: relative;
+  z-index: 1; }
+
+.swiper-slide {
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  height: 40vw; }
+  .swiper-slide img {
+    visibility: hidden; }
