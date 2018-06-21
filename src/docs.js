@@ -66,7 +66,7 @@
                     swiper = this;
                     swiperContainerNode.addClass('active');
                     glsl = getGlslCanvas(swiper);
-                    glsl.loadTexture('u_tex0', 'https://raw.githubusercontent.com/actarian/swiper-webgl/master/docs/img/masks/mask-01.jpg', {
+                    glsl.loadTexture('u_tex0', 'img/textures/tile-02.jpg', {
                         filtering: 'mipmap',
                         repeat: true,
                     });
@@ -91,9 +91,9 @@
         });
 
         function onOver() {
-            TweenLite.to(uniforms, 2.0, {
+            TweenLite.to(uniforms, 0.55, {
                 hover: 1.0,
-                ease: Elastic.easeOut,
+                ease: Power2.easeOut,
                 overwrite: 'all',
                 onUpdate: function () {
                     glsl.setUniform('u_hover', uniforms.hover);
@@ -102,9 +102,9 @@
         }
 
         function onOut() {
-            TweenLite.to(uniforms, 2.0, {
+            TweenLite.to(uniforms, 0.55, {
                 hover: 0.0,
-                ease: Elastic.easeOut,
+                ease: Power2.easeOut,
                 overwrite: 'all',
                 onUpdate: function () {
                     glsl.setUniform('u_hover', uniforms.hover);

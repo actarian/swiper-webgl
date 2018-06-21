@@ -32,21 +32,10 @@ vec2 distort(vec2 xy, float value) {
     return xy + ((xy - mx) * -value * (1.0 - dot(xy, xy))) * 0.2;   
 }
 
-/*
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
-{
-	vec2 uv = fragCoord.xy / iResolution.xy;
-    uv.x *= (1920.0/1080.0);
-    vec2 v = (uv - vec2(.5 * 1920.0/1080.0, .5));
-    vec4 m = iMouse / iResolution.xxxx;
-    
-    //float amount = m.x;
-    float amount = (sin(iTime * 4.0) * .5 ) ;
-        
-    uv = uv + distort(v, amount);
-	fragColor = texture(iChannel0, uv);
+vec2 distort2(vec2 xy, float value, float noise) {
+    xy *= 1.0 - (0.2 * value);
+    return xy + length(xy - mx) * noise * value;   
 }
-*/
 
 void main() {
     float mixer = u_mix;
@@ -54,13 +43,16 @@ void main() {
     float transition = (abs(mixer - 0.5) * 2.0);
 
     vec2 xy = uv;
-    xy = distort(xy, u_hover);
+
+    vec2 nx = vec2(xy.x + u_time * 0.02, xy.y + u_time * 0.03 + cos(xy.x) * 0.1); 
+    
+    // noise texture
+    vec3 noise = texture2D(u_tex0, cropCenter(nx, u_tex0Resolution)).rgb;    
+    
+    xy = distort2(xy, 1.0 - u_hover, noise.r * 0.3);
 
     // bubbling effect
     vec2 bubbling = cos(u_time + xy) * 0.01 * (1.0 - transition);
-    
-    // noise texture
-    vec3 noise = texture2D(u_tex0, cropCenter(xy, u_tex0Resolution)).rgb;    
     
     // picture A texture
     float displacement1 = mixer * displacementStrength;
@@ -80,7 +72,25 @@ void main() {
     float transitionNoised = mix(noise.r, mixer, transition);
 
     vec3 color = mix(texture1, texture2, transitionNoised);
-    color = mix(color, vec3(color.r), u_hover);
+    color = mix(color, vec3((color.r + color.g + color.b) / 3.0), 1.0 - u_hover);
     
     gl_FragColor = vec4(color, 1.0);
 }
+
+
+
+/*
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+	vec2 uv = fragCoord.xy / iResolution.xy;
+    uv.x *= (1920.0/1080.0);
+    vec2 v = (uv - vec2(.5 * 1920.0/1080.0, .5));
+    vec4 m = iMouse / iResolution.xxxx;
+    
+    //float amount = m.x;
+    float amount = (sin(iTime * 4.0) * .5 ) ;
+        
+    uv = uv + distort(v, amount);
+	fragColor = texture(iChannel0, uv);
+}
+*/
