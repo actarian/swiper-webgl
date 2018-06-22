@@ -25,13 +25,11 @@
             var src = node.getAttribute('src');
             var img = new Image();
             img.onload = function () {
-                // console.log('loaded', src);
                 pictureData[index] = img;
                 if (glsl) {
                     updateTextures(glsl.index, glsl.index);
                 }
             };
-            // img.crossOrigin = 'Anonymous';
             img.src = src;
             return src;
         });
@@ -202,14 +200,15 @@
             if (glsl) {
                 var picture1 = pictureData[index1 % pictures.length];
                 var picture2 = pictureData[index2 % pictures.length];
-                glsl.uniformTexture('u_tex1', picture1, {
+                glsl.loadTexture('u_tex1', picture1, {
                     filtering: 'mipmap',
                     repeat: true,
                 });
-                glsl.uniformTexture('u_tex2', picture2, {
+                glsl.loadTexture('u_tex2', picture2, {
                     filtering: 'mipmap',
                     repeat: true,
                 });
+                // uniformTexture
                 // console.log('glsl.updateTextures', 'from', from, 'to', to);
             }
         }
