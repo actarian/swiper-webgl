@@ -20,9 +20,7 @@
 </head>
 
 <body>
-    <section class="section">
-        <!-- CANVAS -->
-        <canvas class="canvas"></canvas>
+    <section class="section" webgl-swiper="shaders/swiper.glsl">
         <!-- SWIPER GALLERY -->
         <div class="swiper-container" swiper swiper-pagination>
             <div class="swiper-wrapper">
@@ -45,7 +43,16 @@
             <span>-</span>
         </div>
     </section>
-
+    <section class="section">
+        <a href="#" webgl-hover="shaders/hover.glsl">
+            <img src="img/pic-02.jpg" />
+            <span>HOVER</span>
+        </a>
+        <a href="#" webgl-hover="shaders/hover.glsl">
+            <img src="img/pic-03.jpg" />
+            <span>WEBGL</span>
+        </a>
+    </section>
     <a href="https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas" target="_blank" class="btn">vscode-glsl-canvas</a>
 </body>
 <script src="js/vendors.min.js"></script>

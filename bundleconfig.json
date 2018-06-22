@@ -27,6 +27,10 @@
     }
 }, {
     "inputFiles": [
+        "src/components/prototype.js",
+        "src/components/utils.js",
+        "src/components/webgl-swiper.js",
+        "src/components/webgl-hover.js",
         "src/docs.js"
     ],
     "outputFileName": "docs/js/docs.js",

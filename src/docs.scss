@@ -10,29 +10,9 @@ body {
     width: 100%;
     height: 50vw;
     background: black;
-}
-
-.canvas {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; // opacity: 0.9;
-}
-
-.info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 40px;
-    display: none;
 }
 
 .btn {
@@ -50,30 +30,72 @@ body {
     color: white;
 }
 
-/*
-@media screen and (min-width: 960px) {
-    body {
-        padding: 20px;
-    }
-    .btn {
-        display: block;
-    }
-}
-*/
-
 @import "components/swiper";
-.swiper-container {
-    position: relative;
-    z-index: 1;
+[webgl-swiper] {
+    background: #111;
+    .canvas {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; // opacity: 0.9;
+    }
+    .swiper-container {
+        position: relative;
+        z-index: 1;
+    }
+    .swiper-slide {
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        img {
+            visibility: hidden;
+        }
+    }
+    .info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 40px;
+        display: none;
+    }
 }
 
-.swiper-slide {
-    overflow: hidden;
-    display: block;
-    width: 100%;
+[webgl-hover] {
+    background: #222;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
     height: 100%;
-    cursor: pointer;
+    flex: 1 0 59%;
+    overflow: hidden;
+    .canvas {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; // opacity: 0.9;
+    }
     img {
-        visibility: hidden;
+        display: none;
+    }
+    span {
+        display: block;
+        position: relative;
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
     }
 }

@@ -8,28 +8,10 @@ body {
   position: relative;
   width: 100%;
   height: 50vw;
-  background: black; }
-
-.canvas {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; }
-
-.info {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  background: black;
   display: flex;
   justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 40px;
-  display: none; }
+  align-items: center; }
 
 .btn {
   display: none;
@@ -45,16 +27,6 @@ body {
   background: #272727;
   color: white; }
 
-/*
-@media screen and (min-width: 960px) {
-    body {
-        padding: 20px;
-    }
-    .btn {
-        display: block;
-    }
-}
-*/
 .swiper-container {
   width: 100%;
   height: 100%; }
@@ -108,15 +80,61 @@ body {
 .swiper-button-next {
   right: 0; }
 
-.swiper-container {
-  position: relative;
-  z-index: 1; }
+[webgl-swiper] {
+  background: #111; }
+  [webgl-swiper] .canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+  [webgl-swiper] .swiper-container {
+    position: relative;
+    z-index: 1; }
+  [webgl-swiper] .swiper-slide {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer; }
+    [webgl-swiper] .swiper-slide img {
+      visibility: hidden; }
+  [webgl-swiper] .info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 40px;
+    display: none; }
 
-.swiper-slide {
-  overflow: hidden;
-  display: block;
-  width: 100%;
+[webgl-hover] {
+  background: #222;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
   height: 100%;
-  cursor: pointer; }
-  .swiper-slide img {
-    visibility: hidden; }
+  flex: 1 0 59%;
+  overflow: hidden; }
+  [webgl-hover] .canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+  [webgl-hover] img {
+    display: none; }
+  [webgl-hover] span {
+    display: block;
+    position: relative;
+    color: white;
+    font-weight: bold;
+    font-size: 30px; }
