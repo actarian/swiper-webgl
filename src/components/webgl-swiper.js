@@ -11,6 +11,23 @@
         var infoNode = containerNode.querySelector('.info > span');
         var swiperContainerNode = containerNode.querySelector('.swiper-container');
         var pictureNodes = swiperContainerNode.querySelectorAll('img');
+        var pictureData = new Array(pictureNodes.length).fill(false);
+        var pictures = Array.prototype.slice.call(pictureNodes, 0).map(function (node, index) {
+            var src = node.getAttribute('src');
+            var img = new Image();
+            img.onload = function () {
+                pictureData[index] = img;
+                var progress = pictureData.find(function (value) {
+                    return value === false;
+                });
+                if (!progress) {
+                    onLoaded();
+                }
+            };
+            img.src = src;
+            return src;
+        });
+        // 
         var previousX = 0,
             previousIndex = null,
             previousDir = null,
@@ -20,19 +37,6 @@
         var uniforms = {
             hover: 0.0,
         };
-        var pictureData = [];
-        var pictures = Array.prototype.slice.call(pictureNodes, 0).map(function (node, index) {
-            var src = node.getAttribute('src');
-            var img = new Image();
-            img.onload = function () {
-                pictureData[index] = img;
-                if (glsl) {
-                    updateTextures(glsl.index, glsl.index);
-                }
-            };
-            img.src = src;
-            return src;
-        });
         var swiper = new Swiper(swiperContainerNode, {
             direction: 'horizontal',
             navigation: {
@@ -68,6 +72,11 @@
             }
         });
         return swiper;
+
+        function onLoaded() {
+            // glsl.updateTexture(glsl.index, glsl.index);
+            updateTextures(glsl.index, glsl.index);
+        }
 
         function onInit() {
             swiper = this;
